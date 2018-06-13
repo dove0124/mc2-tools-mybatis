@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <properties resource="jdbc.properties"></properties>
+    <context id="MySqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="${spring.datasource.driver}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}"></jdbcConnection>
+
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="${java.model.package}" targetProject="src\main\java">
+            <property name="enableSubPackages" value="false"/>
+            <!--<property name="rootClass" value="${java.model.superclass}" />-->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="${java.mapper.xml.package}" targetProject="src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：
+                1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
+                2，MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
+                3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
+                注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
+        -->
+        <javaClientGenerator type="${type}" targetPackage="${java.mapper.class.package}"
+                             targetProject="src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="rule" alias="rule"
+               enableInsert="true" enableSelectByPrimaryKey="true"
+               enableSelectByExample="false" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+
+        <table tableName="rule_dic" alias="rule_dic"
+               enableInsert="true" enableSelectByPrimaryKey="true"
+               enableSelectByExample="false" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+
+        <table tableName="rule_type" alias="rule_type"
+               enableInsert="true" enableSelectByPrimaryKey="true"
+               enableSelectByExample="false" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mybatis.dove.mapper.RuleTypeMapper">
+  <resultMap id="BaseResultMap" type="cn.mybatis.dove.model.entity.RuleType">
+    <id column="rule_type_id" jdbcType="BIGINT" property="id" />
+    <result column="rule_type_rule_type_name" jdbcType="VARCHAR" property="ruleTypeName" />
+    <result column="rule_type_rule_type_des" jdbcType="VARCHAR" property="ruleTypeDes" />
+    <result column="rule_type_rule_type_pic" jdbcType="VARCHAR" property="ruleTypePic" />
+    <result column="rule_type_tenant_id" jdbcType="BIGINT" property="tenantId" />
+    <result column="rule_type_status" jdbcType="INTEGER" property="status" />
+    <result column="rule_type_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="rule_type_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rule_type.id as rule_type_id, rule_type.rule_type_name as rule_type_rule_type_name, 
+    rule_type.rule_type_des as rule_type_rule_type_des, rule_type.rule_type_pic as rule_type_rule_type_pic, 
+    rule_type.tenant_id as rule_type_tenant_id, rule_type.status as rule_type_status, 
+    rule_type.create_time as rule_type_create_time, rule_type.update_time as rule_type_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rule_type rule_type
+    where rule_type.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from rule_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.mybatis.dove.model.entity.RuleType">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rule_type (rule_type_name, rule_type_des, rule_type_pic, 
+      tenant_id, status, create_time, 
+      update_time)
+    values (#{ruleTypeName,jdbcType=VARCHAR}, #{ruleTypeDes,jdbcType=VARCHAR}, #{ruleTypePic,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mybatis.dove.model.entity.RuleType">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rule_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ruleTypeName != null">
+        rule_type_name,
+      </if>
+      <if test="ruleTypeDes != null">
+        rule_type_des,
+      </if>
+      <if test="ruleTypePic != null">
+        rule_type_pic,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ruleTypeName != null">
+        #{ruleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTypeDes != null">
+        #{ruleTypeDes,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTypePic != null">
+        #{ruleTypePic,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mybatis.dove.model.entity.RuleType">
+    update rule_type
+    <set>
+      <if test="ruleTypeName != null">
+        rule_type_name = #{ruleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTypeDes != null">
+        rule_type_des = #{ruleTypeDes,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTypePic != null">
+        rule_type_pic = #{ruleTypePic,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mybatis.dove.model.entity.RuleType">
+    update rule_type
+    set rule_type_name = #{ruleTypeName,jdbcType=VARCHAR},
+      rule_type_des = #{ruleTypeDes,jdbcType=VARCHAR},
+      rule_type_pic = #{ruleTypePic,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

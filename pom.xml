@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cn.mc2.mybatis</groupId>
+  <artifactId>mc2-tools-mybatis</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  
+  <packaging>pom</packaging>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<jackson-annotations.version>2.5.0</jackson-annotations.version>
+		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<mysql-connector-java.version>5.1.18</mysql-connector-java.version>
+		<mybatis.version>3.4.1</mybatis.version>
+		<mybatis-generator-maven-plugin.version>1.3.5</mybatis-generator-maven-plugin.version>
+		<mybatis.generator.outputDirectory>MAVEN</mybatis.generator.outputDirectory>
+		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
+		<mybatis.generator.verbose>true</mybatis.generator.verbose>
+		<mybatis.generator.contexts>MySqlTables</mybatis.generator.contexts>
+		<mybatis.generator.tableNames></mybatis.generator.tableNames>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-annotations.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${mybatis-generator-maven-plugin.version}</version>
+				<dependencies>
+					<dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql-connector-java.version}</version>
+                    </dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
